@@ -14,7 +14,7 @@
       "Fields": [
         {
           "FieldId": "Invoice.NoCategory.ScannedInvoice.InVoiceNumber",
-          "FieldName": "InVoiceNumber",
+          "FieldName": "Invoice No",
           "IsMultiValue": false,
           "Type": "Number",
           "DeriveFieldsFormat": "",
@@ -35,7 +35,7 @@
         },
         {
           "FieldId": "Invoice.NoCategory.ScannedInvoice.Date",
-          "FieldName": "Date",
+          "FieldName": "Invoice Date",
           "IsMultiValue": false,
           "Type": "Date",
           "DeriveFieldsFormat": "",

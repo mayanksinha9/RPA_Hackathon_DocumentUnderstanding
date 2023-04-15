@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="818.4,2563.2" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/intelligentocr" xmlns:p1="http://schemas.uipath.com/workflow/activities/intelligentocr/extraction" xmlns:p2="http://schemas.uipath.com/workflow/activities/documentunderstanding-ml" xmlns:p3="http://schemas.uipath.com/workflow/activities/document-processing-contracts/extraction" xmlns:p4="http://schemas.uipath.com/workflow/activities/document-processing-contracts/results" xmlns:p5="http://schemas.uipath.com/workflow/activities/document-processing-contracts/dom" xmlns:p6="http://schemas.uipath.com/workflow/activities/document-processing-contracts/taxonomy" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:sd1="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uoa="clr-namespace:UiPath.OmniPage.Activities;assembly=UiPath.OmniPage.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="971.2,2677.6" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/intelligentocr" xmlns:p1="http://schemas.uipath.com/workflow/activities/intelligentocr/extraction" xmlns:p2="http://schemas.uipath.com/workflow/activities/documentunderstanding-ml" xmlns:p3="http://schemas.uipath.com/workflow/activities/document-processing-contracts/results" xmlns:p4="http://schemas.uipath.com/workflow/activities/document-processing-contracts/dom" xmlns:p5="http://schemas.uipath.com/workflow/activities/document-processing-contracts/extraction" xmlns:p6="http://schemas.uipath.com/workflow/activities/document-processing-contracts/taxonomy" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:sd1="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uoa="clr-namespace:UiPath.OmniPage.Activities;assembly=UiPath.OmniPage.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="90">
+    <scg:List x:TypeArguments="x:String" Capacity="94">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -48,6 +48,7 @@
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -76,7 +77,6 @@
       <AssemblyReference>UiPath.DocumentProcessing.Contracts</AssemblyReference>
       <AssemblyReference>UiPath.IntelligentOCR.Activities</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
@@ -93,9 +93,10 @@
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="762.4,2498.4" sap2010:WorkflowViewState.IdRef="Sequence_4">
+  <Sequence sap:VirtualizedContainerService.HintSize="762.4,2612.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:String[]" Name="AllFiles" />
       <Variable x:TypeArguments="x:String" Name="Folderlocation">
@@ -105,23 +106,25 @@
       </Variable>
       <Variable x:TypeArguments="p6:DocumentTaxonomy" Name="Taxonomy" />
       <Variable x:TypeArguments="x:String" Name="DocPath" />
-      <Variable x:TypeArguments="p5:Document" Name="DOM" />
+      <Variable x:TypeArguments="p4:Document" Name="DOM" />
       <Variable x:TypeArguments="x:String" Name="doctext" />
-      <Variable x:TypeArguments="p4:ExtractionResult" Name="extractResult" />
-      <Variable x:TypeArguments="p4:ExtractionResult" Name="ValidateionResult" />
+      <Variable x:TypeArguments="p3:ExtractionResult" Name="extractResult" />
+      <Variable x:TypeArguments="p3:ExtractionResult" Name="ValidateionResult" />
       <Variable x:TypeArguments="sd1:DataSet" Name="DataSet" />
+      <Variable x:TypeArguments="sd1:DataTable" Name="op_dt" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap:VirtualizedContainerService.HintSize="700,2386.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence sap:VirtualizedContainerService.HintSize="700,2252" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
+      <ui:BuildDataTable DataTable="[op_dt]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="637.6,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Invoice_x0020_No&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Invoice_x0020_Date&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Total&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
       <Assign sap:VirtualizedContainerService.HintSize="637.6,60" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="s:String[]">[AllFiles]</OutArgument>
@@ -130,19 +133,19 @@
           <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(Folderlocation)]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="637.6,2174.4" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[AllFiles]">
+      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="637.6,1940" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[AllFiles]">
         <ui:ForEach.Body>
           <ActivityAction x:TypeArguments="x:String">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:String" Name="files" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="602.4,2049.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="602.4,1815.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="540,1937.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+              <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="540,1703.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -158,7 +161,7 @@
                   </Assign.Value>
                 </Assign>
                 <p:LoadTaxonomy DisplayName="Load Taxonomy" sap:VirtualizedContainerService.HintSize="477.6,105.6" sap2010:WorkflowViewState.IdRef="LoadTaxonomy_1" Taxonomy="[Taxonomy]" />
-                <p:DigitizeDocument ApplyOcrMigrated="False" ApplyOcrOnPdf="Yes" DegreeOfParallelism="1" DetectCheckboxes="True" DisplayName="Digitize Document" DocumentObjectModel="[DOM]" DocumentPath="[DocPath]" DocumentText="[doctext]" ForceApplyOCR="False" sap:VirtualizedContainerService.HintSize="477.6,300" sap2010:WorkflowViewState.IdRef="DigitizeDocument_1">
+                <p:DigitizeDocument ApplyOcrMigrated="True" ApplyOcrOnPdf="Auto" DegreeOfParallelism="1" DetectCheckboxes="True" DisplayName="Digitize Document" DocumentObjectModel="[DOM]" DocumentPath="[DocPath]" DocumentText="[doctext]" ForceApplyOCR="False" sap:VirtualizedContainerService.HintSize="477.6,300" sap2010:WorkflowViewState.IdRef="DigitizeDocument_1">
                   <p:DigitizeDocument.OCREngine>
                     <ActivityFunc x:TypeArguments="sd:Image, x:String, scg:IEnumerable(scg:KeyValuePair(sd:Rectangle, x:String))">
                       <ActivityFunc.Argument1>
@@ -180,16 +183,16 @@
                         </sc:BindingList>
                       </p2:MachineLearningExtractor.AvailableMLSkills>
                       <p2:MachineLearningExtractor.DocumentBounds>
-                        <InArgument x:TypeArguments="p4:ResultsDocumentBounds">
-                          <DelegateArgumentValue x:TypeArguments="p4:ResultsDocumentBounds">
-                            <DelegateInArgument x:TypeArguments="p4:ResultsDocumentBounds" Name="DocumentBounds" />
+                        <InArgument x:TypeArguments="p3:ResultsDocumentBounds">
+                          <DelegateArgumentValue x:TypeArguments="p3:ResultsDocumentBounds">
+                            <DelegateInArgument x:TypeArguments="p3:ResultsDocumentBounds" Name="DocumentBounds" />
                           </DelegateArgumentValue>
                         </InArgument>
                       </p2:MachineLearningExtractor.DocumentBounds>
                       <p2:MachineLearningExtractor.DocumentObjectModel>
-                        <InArgument x:TypeArguments="p5:Document">
-                          <DelegateArgumentValue x:TypeArguments="p5:Document">
-                            <DelegateInArgument x:TypeArguments="p5:Document" Name="DocumentObjectModel" />
+                        <InArgument x:TypeArguments="p4:Document">
+                          <DelegateArgumentValue x:TypeArguments="p4:Document">
+                            <DelegateInArgument x:TypeArguments="p4:Document" Name="DocumentObjectModel" />
                           </DelegateArgumentValue>
                         </InArgument>
                       </p2:MachineLearningExtractor.DocumentObjectModel>
@@ -208,16 +211,16 @@
                         </InArgument>
                       </p2:MachineLearningExtractor.DocumentText>
                       <p2:MachineLearningExtractor.ExtractorDocumentType>
-                        <InArgument x:TypeArguments="p3:ExtractorDocumentType">
-                          <DelegateArgumentValue x:TypeArguments="p3:ExtractorDocumentType">
-                            <DelegateInArgument x:TypeArguments="p3:ExtractorDocumentType" Name="ExtractorDocumentType" />
+                        <InArgument x:TypeArguments="p5:ExtractorDocumentType">
+                          <DelegateArgumentValue x:TypeArguments="p5:ExtractorDocumentType">
+                            <DelegateInArgument x:TypeArguments="p5:ExtractorDocumentType" Name="ExtractorDocumentType" />
                           </DelegateArgumentValue>
                         </InArgument>
                       </p2:MachineLearningExtractor.ExtractorDocumentType>
                       <p2:MachineLearningExtractor.ExtractorResult>
-                        <OutArgument x:TypeArguments="p3:ExtractorResult">
-                          <DelegateArgumentReference x:TypeArguments="p3:ExtractorResult">
-                            <DelegateOutArgument x:TypeArguments="p3:ExtractorResult" Name="ExtractorResult" />
+                        <OutArgument x:TypeArguments="p5:ExtractorResult">
+                          <DelegateArgumentReference x:TypeArguments="p5:ExtractorResult">
+                            <DelegateOutArgument x:TypeArguments="p5:ExtractorResult" Name="ExtractorResult" />
                           </DelegateArgumentReference>
                         </OutArgument>
                       </p2:MachineLearningExtractor.ExtractorResult>
@@ -231,37 +234,208 @@
                     </p2:MachineLearningExtractor>
                   </p1:DataExtractionScope.Extractors>
                 </p1:DataExtractionScope>
-                <p:PresentValidationStation AutomaticExtractionResults="[extractResult]" DisplayName="Present Validation Station" DocumentObjectModel="[DOM]" DocumentPath="[DocPath]" DocumentText="[doctext]" sap:VirtualizedContainerService.HintSize="477.6,68.8" sap2010:WorkflowViewState.IdRef="PresentValidationStation_2" ShowOnlyRelevantPageRange="False" Taxonomy="[Taxonomy]" ValidatedExtractionResults="[ValidateionResult]">
+                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="477.6,52.8" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                  <ui:CommentOut.Body>
+                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,180.8" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <p:PresentValidationStation AutomaticExtractionResults="[extractResult]" DisplayName="Present Validation Station" DocumentObjectModel="[DOM]" DocumentPath="[DocPath]" DocumentText="[doctext]" sap:VirtualizedContainerService.HintSize="337.6,68.8" sap2010:WorkflowViewState.IdRef="PresentValidationStation_3" ShowOnlyRelevantPageRange="False" Taxonomy="[Taxonomy]" ValidatedExtractionResults="[ValidateionResult]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </p:PresentValidationStation>
+                    </Sequence>
+                  </ui:CommentOut.Body>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                </p:PresentValidationStation>
+                </ui:CommentOut>
                 <p1:ExportExtractionResults DataSet="[DataSet]" DisplayName="Export Extraction Results" ExtractionResult="[extractResult]" sap:VirtualizedContainerService.HintSize="477.6,176.8" sap2010:WorkflowViewState.IdRef="ExportExtractionResults_1" IncludeConfidence="False" IncludeOCRConfidence="False" />
-                <ui:ForEach x:TypeArguments="sd1:DataTable" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="477.6,352.8" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[DataSet.Tables]">
-                  <ui:ForEach.Body>
-                    <ActivityAction x:TypeArguments="sd1:DataTable">
-                      <ActivityAction.Argument>
-                        <DelegateInArgument x:TypeArguments="sd1:DataTable" Name="item" />
-                      </ActivityAction.Argument>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,228" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <ui:MergeDataTable Destination="[op_dt]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="477.6,134.4" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[DataSet.Tables(0)]" />
+              </Sequence>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:ForEach>
+    </Sequence>
+    <ui:WriteRange AddHeaders="True" DataTable="[op_dt]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="700,116" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="sheet1" StartingCell="A1" WorkbookPath="Output\ExtractedInvoices.xlsx">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:WriteRange>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="700,52.8" sap2010:WorkflowViewState.IdRef="CommentOut_10">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,164.8" sap2010:WorkflowViewState.IdRef="Sequence_16">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEach x:TypeArguments="sd1:DataTable" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="337.6,52.8" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[DataSet.Tables]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="sd1:DataTable">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd1:DataTable" Name="item" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,350.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="invoiceno" />
+                    <Variable x:TypeArguments="x:String" Name="date1" />
+                    <Variable x:TypeArguments="x:String" Name="Total" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="337.6,52.8" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="588.8,164.8" sap2010:WorkflowViewState.IdRef="Sequence_12">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:AppendRange DataTable="[item]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="337.6,116" sap2010:WorkflowViewState.IdRef="AppendRange_1" SheetName="Sheet1" WorkbookPath="Invoice.xlsx" />
+                        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[item]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="337.6,52.8" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                          <ui:ForEachRow.Body>
+                            <ActivityAction x:TypeArguments="sd1:DataRow">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="sd1:DataRow" Name="CurrentRow" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="492.8,276" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="430.4,164" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                                  <ui:MultipleAssign.AssignOperations>
+                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[invoiceno]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[CurrentRow(0).ToString]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[date1]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[CurrentRow(1).ToString]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[Total]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[CurrentRow(2).ToString]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                    </scg:List>
+                                  </ui:MultipleAssign.AssignOperations>
+                                </ui:MultipleAssign>
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ForEachRow.Body>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:ForEachRow>
                       </Sequence>
-                    </ActivityAction>
-                  </ui:ForEach.Body>
-                </ui:ForEach>
-              </Sequence>
-            </Sequence>
-          </ActivityAction>
-        </ui:ForEach.Body>
-      </ui:ForEach>
-    </Sequence>
+                    </ui:CommentOut.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CommentOut>
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="337.6,52.8" sap2010:WorkflowViewState.IdRef="CommentOut_7">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,300" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{invoiceno,date1,Total}]" DataTable="[op_dt]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="337.6,188" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CommentOut>
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="337.6,52.8" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,228" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:AppendRange DataTable="[item]" DisplayName="Append Range Workbook" sap:VirtualizedContainerService.HintSize="337.6,116" sap2010:WorkflowViewState.IdRef="AppendRange_3" SheetName="[item.TableName.ToString]" WorkbookPath="Invoice.xlsx">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:AppendRange>
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CommentOut>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ForEach>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
   </Sequence>
 </Activity>
